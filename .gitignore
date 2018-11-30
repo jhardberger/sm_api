@@ -1,1 +1,6 @@
+#node
 node_modules
+
+#spotify client info
+clientID.js
+clientSecret.js
