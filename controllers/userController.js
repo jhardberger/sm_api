@@ -1,24 +1,20 @@
-const express	   = require('express');
-const router  	   = express.Router();
-const request 	   = require('request');
-const cors 		   = require('cors');
-const querystring  = require('querystring');
-const cookieParser = require('cookie-parser');
-
-
-/**			API business		**/
-const baseEndPoint = 'https://api.spotify.com/v1/'
+const express	   	= require('express');
+const app 		   	= express();
+const router  	   	= express.Router();
+const request 	   	= require('request');
+const cors 		   	= require('cors');
+const querystring  	= require('querystring');
+const cookieParser 	= require('cookie-parser');
 
 
 /**			SPOTIFY Auth 		**/
-
 //import our dev client info for spotify
-const clientID 		= require('./clientID');
-const clientSecret  = require('./clientSecret');
+const clientID 		= require('../clientID');
+const clientSecret  = require('../clientSecret');
 
 const client_id     = clientID;
-const client_secret = client_secret; 	
-const redirect_uri  = ''; //TBD
+const client_secret = clientSecret; 	
+const redirect_uri  = 'localhost:9000/callback'; 
 
 const generateRandomString = function(length) {
   let text = '';
@@ -33,8 +29,17 @@ const generateRandomString = function(length) {
 const stateKey = 'spotify_auth_state';
 
 
-/**			APP					**/
-const app = express();
+/**			TEST				**/
+// router.get('/', async (req, res, next) => {
+	
+// 	try {
+// 		res.send('hi there');
+		
+// 	} catch(err){
+// 		next(err)
+// 	}
+
+// });
 
 
 /** 		AUTH routes 		**/
@@ -57,16 +62,16 @@ app.get('/login', function(req, res) {
 		redirect_uri: redirect_uri,
 		state: state
     }));
-}));
+});
 
-	//CALLBACK  is based on the spotify auth guide, will probably change l8r
-app.get('/callback', function (req, res) => {
+	//CALLBACK is based on the spotify auth guide, will probably change l8r
+app.get('/callback', function (req, res) {
 	//this is where we get our tokens
 	const code 	= req.query.code || null;
 	const state = req.query.state || null;
 	const storedState = req.cookies ? req.cookies [stateKey]: null;
 
-	if (state === null or state !== storedState){
+	if (state === null || state !== storedState){
 		res.redirect('/#' + 
 			querystring.stringify({
 				error: 'state_mismatch'
@@ -93,14 +98,15 @@ app.get('/callback', function (req, res) => {
 				const access_token  = body.access_token;
 				const refresh_token = body.refresh_token; 
 
+				//this is for our API requests
 				const options = {
     				url: 'https://api.spotify.com/v1/me',
           			headers: { 'Authorization': 'Bearer ' + access_token },
          			json: true				
          		};
 
-         		//this is where we'll use the token to do some fun stuff 
-
+         		//
+         		
 			}else{
 				res.redirect('/#' + 
 					querystring.stringify({
@@ -113,20 +119,20 @@ app.get('/callback', function (req, res) => {
 
 
 //ROUTES FOR MEDIA hang on to this for later
-router.get('/library', async (req, res, next) => {
+// router.get('/library', async (req, res, next) => {
 	
-	try {
-		const topArtists = await fetch(baseEndPoint + 'me/top/artists?time_range=%20all-time&limit=20" -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer' + //API KEY)
-		const topArtistsJson = await topArtists.json();
-		const topArtistsMap = await topArtistsJson.map((artist, i) => {
-			console.log(artist);
-		});
-		res.send(topArtistsMap);
-	} catch(err){
-		next(err);
-	}
+// 	try {
+// 		const topArtists = await fetch(baseEndPoint + 'me/top/artists?time_range=%20all-time&limit=20" -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer' + );
+// 		const topArtistsJson = await topArtists.json();
+// 		const topArtistsMap = await topArtistsJson.map((artist, i) => {
+// 			console.log(artist);
+// 		});
+// 		res.send(topArtistsMap);
+// 	} catch(err){
+// 		next(err);
+// 	}
 	
-});
+// });
 
 
 module.exports = router;

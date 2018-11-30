@@ -1,15 +1,29 @@
 const express		= require('express');
 const app 			= express();
+const bodyParser	= require('body-parser');
+const cors 			= require('cors');
 
 require ('./db/db');
 
-//Session TK
+/**			MIDDLEWARE			**/
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
-//CORS TK
+const corsOptions = {
+	origin: 'http://localhost:3000',
+	credentials: true,
+	optionsSuccessStatus: 200
+}
+app.use(cors(corsOptions));
 
-//Controllers TK
 
-//Listener
+/**			CONTROLLERS			**/
+const userController = require('./controllers/userController');
+
+app.use('/api/v1/user', userController);
+
+
+/**			LISTENER 			**/
 app.listen(process.env.PORT || 9000, () => {
   console.log('listening on port 9000');
 });
