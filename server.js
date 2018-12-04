@@ -18,12 +18,12 @@ app.use(cors(corsOptions));
 
 
 /**			CONTROLLERS			**/
-const userController = require('./controllers/userController');
+const loginController = require('./controllers/loginController');
 
-app.use('/api/v1/user', userController);
+app.use('/login', loginController);
 
 
 /**			LISTENER 			**/
-// app.listen(process.env.PORT || 9000, () => {
-//   console.log('listening on port 9000');
-// });
+app.listen(process.env.PORT || 9000, () => {
+  console.log('listening on port 9000');
+});
