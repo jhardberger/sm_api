@@ -2,8 +2,17 @@ const express		= require('express');
 const app 			= express();
 const bodyParser	= require('body-parser');
 const cors 			= require('cors');
+const session		= require('express-session');
 
 require ('./db/db');
+
+/**			SESSION 			**/
+app.use(session({
+	secret: 'funkytown',
+	resave: false,
+	saveUninitialized: false
+}));
+
 
 /**			MIDDLEWARE			**/
 app.use(bodyParser.urlencoded({extended: false}));
