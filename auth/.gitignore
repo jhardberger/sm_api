@@ -1,0 +1,7 @@
+#node
+node_modules/
+
+#api stuff
+clientId.js
+clientSecret.js
+

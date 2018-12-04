@@ -24,6 +24,6 @@ app.use('/api/v1/user', userController);
 
 
 /**			LISTENER 			**/
-app.listen(process.env.PORT || 9000, () => {
-  console.log('listening on port 9000');
-});
+// app.listen(process.env.PORT || 9000, () => {
+//   console.log('listening on port 9000');
+// });
