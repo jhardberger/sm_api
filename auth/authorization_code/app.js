@@ -38,7 +38,7 @@ app.get('/login', function(req, res) {
   res.cookie(stateKey, state);
 
   //scope of what we can grab from spotify
-  const scope = 'user-read-private user-read-email user-read-recently-played user-top-read';
+  const scope = 'user-read-private user-read-email user-read-recently-played user-read-currently-playing user-read-playback-state user-top-read';
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
       response_type: 'code',
