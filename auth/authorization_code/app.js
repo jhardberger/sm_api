@@ -80,7 +80,7 @@ app.get('/callback', function(req, res) {
 
         const access_token = body.access_token;
         const refresh_token  = body.refresh_token;
-        const user_id = null; 
+        // let user_id = null; 
 
         const options = {
           url: 'https://api.spotify.com/v1/me',
@@ -89,16 +89,16 @@ app.get('/callback', function(req, res) {
         };
 
         // use the access token to access the Spotify Web API
-        request.get(options, function(error, response, body) {
-          console.log(body, '<--------- this is my body');
-          console.log(body.id, '<----------this is my body id');
-          user_id = body.id;
-          user_id.save(); 
-          console.log(user_id, '<---------- user id');
-        });
+        // request.get(options, function(error, response, body) {
+        //   console.log(body, '<--------- this is my body');
+        //   console.log(body.id, '<----------this is my body id');
+        //   user_id = body.id;
+        //   user_id.save(); 
+        //   console.log(user_id, '<---------- user id');
+        // });
 
         // we can also pass the token to the browser to make requests from there
-        res.redirect('http://localhost:3000/#' +
+        res.redirect('http://localhost:3000/home/#' +
           querystring.stringify({
             access_token: access_token,
             refresh_token: refresh_token,
