@@ -28,8 +28,10 @@ app.use(cors(corsOptions));
 
 /**			CONTROLLERS			**/
 const loginController = require('./controllers/loginController');
+const moldController  = require('./controllers/moldController');
 
 app.use('/login', loginController);
+app.use('/', moldController);
 
 
 /**			LISTENER 			**/
