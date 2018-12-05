@@ -12,6 +12,7 @@
     "express-session": "^1.15.6",
     "favicon": "0.0.2",
     "mongoose": "^5.3.14",
+    "mongoose-type-url": "^1.0.5",
     "querystring": "^0.2.0",
     "request": "^2.88.0",
     "session": "^0.1.0"
