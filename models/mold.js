@@ -14,7 +14,6 @@ const MoldSchema = new mongoose.Schema({
 	speechiness: Number,
 	tempo: Number,
 	valence: Number,
-
 });
 
 module.exports = mongoose.model('Mold', MoldSchema);
