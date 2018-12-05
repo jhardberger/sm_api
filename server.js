@@ -25,7 +25,7 @@ const corsOptions = {
 }
 app.use(cors(corsOptions));
 
-// Add headers
+// cors headers
 app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
