@@ -5,15 +5,13 @@ require('mongoose-type-url');
 const MoldSchema = new mongoose.Schema({
 	title: String,
 	seed_song_id: String,
-	acousticness: Number,
-	danceability: Number,
-	energy: Number,
-	instrumentalness: Number,
-	liveness: Number,
-	loudness: Number,
-	speechiness: Number,
-	tempo: Number,
-	valence: Number,
+	acoustic: Boolean,
+	danceable: Boolean,
+	energetic: Boolean,
+	instrumental: Boolean,
+	live: Boolean,
+	spoken: Boolean,
+	upbeat: Boolean,
 });
 
 module.exports = mongoose.model('Mold', MoldSchema);
