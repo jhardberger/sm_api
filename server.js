@@ -18,18 +18,21 @@ app.use(session({
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
+/**			CORS 				**/
+const origin = process.env.CLIENT_URL || 'http://localhost:3000';
+
 const corsOptions = {
-	origin: 'http://localhost:3000',
+	origin: origin,
 	credentials: true,
 	optionsSuccessStatus: 200
 }
 app.use(cors(corsOptions));
 
-// cors headers
+/** 		fixes coors headers **/
 app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.setHeader('Access-Control-Allow-Origin', origin);
 
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
