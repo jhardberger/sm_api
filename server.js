@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 /**			CORS 				**/
-const origin = process.env.CLIENT_URL || 'http://localhost:3000';
+const origin = 'http://localhost:3000' || process.env.CLIENT_URL;
 
 const corsOptions = {
 	origin: origin,
