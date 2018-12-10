@@ -1,11 +1,10 @@
 const express = require('express');
 const router  = express.Router();
 const Mold  = require('../models/mold');
-//require Mold model here
 
 /**				index				**/
 router.get('/', async (req, res) => {
-	console.log(req.body, '<-------body from react');
+	console.log(req.body, '<-------body from react - all molds');
 
 	try {
 		const allMolds = await Mold.find();
@@ -24,8 +23,10 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
 	
 	try {
-		console.log(req.body, '<------body from react');
-		const createdMold = await Mold.create(req.body);
+		console.log(req.body, '<------body from react - new mold');
+		const createdMold = await Mold.create(req.body.newMold);
+
+		console.log(createdMold, '<------- createdmold');
 
 		res.json({
 			status: 200,
@@ -44,7 +45,7 @@ router.get('/:id', async (req, res) => {
 
 		res.json({
 			status: 200,
-			data: foundMovie
+			data: foundMold
 		})
 	} catch(err){
 		res.send(err)

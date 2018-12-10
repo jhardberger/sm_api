@@ -14,21 +14,17 @@ app.use(session({
 }));
 
 
-/**			MIDDLEWARE			**/
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json());
-
-/**			CORS 				**/
+/**         CORS                **/
 const origin = 'http://localhost:3000' || process.env.CLIENT_URL;
 
 const corsOptions = {
-	origin: origin,
-	credentials: true,
-	optionsSuccessStatus: 200
+    origin: origin,
+    credentials: true,
+    optionsSuccessStatus: 200
 }
 app.use(cors(corsOptions));
 
-/** 		fixes coors headers **/
+/**         fixes coors headers **/
 app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
@@ -49,12 +45,17 @@ app.use(function (req, res, next) {
 });
 
 
+/**			MIDDLEWARE			**/
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+
+
 /**			CONTROLLERS			**/
 const loginController = require('./controllers/loginController');
 const moldController  = require('./controllers/moldController');
 
 app.use('/login', loginController);
-app.use('/api/v1/molds', moldController);
+app.use('/api/v1/molds/', moldController);
 
 
 /**			LISTENER 			**/
