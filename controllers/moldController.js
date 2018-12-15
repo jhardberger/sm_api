@@ -24,7 +24,7 @@ router.post('/', async (req, res) => {
 	
 	try {
 		console.log(req.body, '<------body from react - new mold');
-		const createdMold = await Mold.create(req.body.newMold);
+		const createdMold = await Mold.create(req.body);
 
 		console.log(createdMold, '<------- createdmold');
 
